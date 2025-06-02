@@ -1,3 +1,5 @@
+from django.contrib.auth.hashers import make_password
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 # Create your models here.
@@ -24,14 +26,18 @@ class Card(models.Model):
     def __str__(self):
         return f'Card {self.id} – User {self.user.name}'
 
-class Employee(models.Model):
-    name = models.CharField(max_length=100)
-    password = models.CharField(max_length=100)
+class Employee(AbstractUser):
     class Meta:
         verbose_name = "Сотрудник"
         verbose_name_plural = "Сотрудники"
+
+    def save(self, *args, **kwargs):
+        # если пароль ещё не захэширован (не начинается с 'pbkdf2_…')
+        if not self.password.startswith('pbkdf2_'):
+            self.password = make_password(self.password)
+        super().save(*args, **kwargs)
     def __str__(self):
-        return self.name
+        return self.username
 class  Transaction(models.Model):
     TYPE_CHOICES=  [
         ('deposit',"зачисление"),

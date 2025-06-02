@@ -20,8 +20,8 @@ class CardAdmin(admin.ModelAdmin):
 
 @admin.register(Employee)
 class EmployeeAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name')
-    search_fields = ('name',)
+    list_display = ('id', 'username')
+    search_fields = ('username',)
 
 
 @admin.register(Transaction)

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Личный кабинет</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'bonus/css/personal_account.css' %}">
+</head>
+<body>
+<div class="dashboard-wrapper">
+    <div class="dashboard-container">
+        <h1>Добро пожаловать, {{ user_name }}!</h1>
+
+        <!-- Форма поиска -->
+        <form method="post" action="">
+            {% csrf_token %}
+            <div class="search-block">
+                <input
+                    type="text"
+                    id="search"
+                    name="search"
+                    placeholder="Поиск клиента..."
+                >
+                <button type="submit" id="search-btn">Искать</button>
+            </div>
+        </form>
+
+        <!-- Кнопка добавления клиента -->
+        <button class="add-client-btn">Добавить клиента</button>
+    </div>
+</div>
+</body>
+</html>
