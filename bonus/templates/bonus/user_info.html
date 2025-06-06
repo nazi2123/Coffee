@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Информация о пользователе</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'bonus/css/user_info.css' %}">
+</head>
+<body>
+<div class="info-wrapper">
+    <div class="info-container">
+        <h2>Найти пользователя по телефону</h2>
+        <form method="post">
+            {% csrf_token %}
+            <label for="phone_search">Телефон</label>
+            <input type="tel" id="phone_search" name="phone_search" required placeholder="+7(___)___-__-__" maxlength="16">
+            <button type="submit" name="action" value="search">Искать</button>
+        </form>
+
+        {% if user_obj %}
+        <div class="user-details">
+            <h3>{{ user_obj.name }}</h3>
+            <p class="phone">Телефон: {{ user_obj.phone }}</p>
+            <p class="balance-label">Баллы:</p>
+            <p class="balance">{{ card_balance }}</p>
+            <div class="buttons-row">
+                <button id="deposit-btn">Копить</button>
+                <button id="withdraw-btn">Списать</button>
+            </div>
+            <a href="{% url 'personal_account' %}" class="back-btn">Назад</a>
+        </div>
+        {% elif searched %}
+        <p class="not-found">Пользователь с таким номером не найден.</p>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Модальное окно для начисления -->
+<div id="deposit-modal" class="modal-overlay">
+    <div class="modal-content">
+        <h3>Начислить баллы</h3>
+        <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="deposit">
+            <input type="hidden" name="user_id" value="{{ user_obj.id }}">
+            <label for="order_sum_deposit">Сумма заказа (руб)</label>
+            <input type="number" id="order_sum_deposit" name="order_sum" min="0" required>
+            <p>Начислено баллов: <span id="calculated-bonus">0</span></p>
+            <button type="submit">Сохранить</button>
+            <button type="button" id="close-deposit">Отмена</button>
+        </form>
+    </div>
+</div>
+
+<!-- Модальное окно для списания -->
+<div id="withdraw-modal" class="modal-overlay">
+    <div class="modal-content">
+        <h3>Списать баллы</h3>
+        <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="withdraw">
+            <input type="hidden" name="user_id" value="{{ user_obj.id }}">
+            <label for="order_sum_withdraw">Сумма заказа (руб)</label>
+            <input type="number" id="order_sum_withdraw" name="order_sum" min="0" required>
+            <p>Итоговая сумма к оплате: <span id="updated-price">0</span> руб.</p>
+            <p>Будет списано баллов: <span id="points-to-use">0</span></p>
+            <button type="submit">Сохранить</button>
+            <button type="button" id="close-withdraw">Отмена</button>
+        </form>
+    </div>
+</div>
+
+<script src="{% static 'bonus/js/user_info.js' %}"></script>
+</body>
+</html>

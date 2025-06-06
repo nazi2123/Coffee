@@ -13,16 +13,16 @@
         <h1>Добро пожаловать, {{ user_name }}!</h1>
 
         <!-- Форма поиска -->
-        <form method="post" action="">
+        <form method="post" action="{% url 'user_info'%}">
             {% csrf_token %}
             <div class="search-block">
                 <input
                     type="text"
                     id="search"
                     name="search"
-                    placeholder="Поиск клиента..."
+                    placeholder="+7 (___) ___-__-__"
                 >
-                <button type="submit" id="search-btn">Искать</button>
+                <button type="submit" name="action" id="search-btn">Искать</button>
             </div>
         </form>
 
@@ -30,5 +30,6 @@
         <button onclick="window.location.href='{%url 'add_client'%}' "  class="add-client-btn">Добавить клиента</button>
     </div>
 </div>
+<script src="{% static 'bonus/js/personal_account.js' %}"></script>
 </body>
 </html>
