@@ -1,10 +1,3 @@
-// Маска телефона для поля поиска
-document.getElementById('phone_search').addEventListener('input', function (e) {
-    let x = e.target.value.replace(/\D/g, '').match(/(\d{0,1})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
-    e.target.value = !x[2] ? '+7' + (x[1] ? '(' + x[1] : '') :
-                     '+7(' + x[2] + ')' + (x[3] ? x[3] : '') +
-                     (x[4] ? '-' + x[4] : '') + (x[5] ? '-' + x[5] : '');
-});
 
 // Открытие/закрытие модальных окон
 const depositBtn = document.getElementById('deposit-btn');
@@ -47,11 +40,7 @@ if (orderSumDeposit) {
 const orderSumWithdraw = document.getElementById('order_sum_withdraw');
 const updatedPrice = document.getElementById('updated-price');
 const pointsToUse = document.getElementById('points-to-use');
-{% if user_obj %}
-const currentBalance = parseInt("{{ card_balance }}") || 0;
-{% else %}
-const currentBalance = 0;
-{% endif %}
+
 if (orderSumWithdraw) {
     orderSumWithdraw.addEventListener('input', () => {
         let sum = parseFloat(orderSumWithdraw.value) || 0;

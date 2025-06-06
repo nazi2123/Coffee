@@ -8,26 +8,26 @@
 </head>
 <body>
 <div class="dashboard-wrapper">
-    <button onclick="window.location.href='{%url 'login'%}' " class="exit">Выход</button>
+    <button onclick="window.location.href='{% url 'login' %}'" class="exit">Выход</button>
     <div class="dashboard-container">
         <h1>Добро пожаловать, {{ user_name }}!</h1>
 
-        <!-- Форма поиска -->
-        <form method="post" action="{% url 'user_info'%}">
-            {% csrf_token %}
+        <!-- Форма поиска (GET-запрос в user_info) -->
+        <form method="get" action="{% url 'user_info' %}">
             <div class="search-block">
                 <input
-                    type="text"
-                    id="search"
-                    name="search"
+                    type="tel"
+                    id="phone"
+                    name="phone"
                     placeholder="+7 (___) ___-__-__"
+                    required
                 >
-                <button type="submit" name="action" id="search-btn">Искать</button>
+                <button type="submit" id="search-btn">Искать</button>
             </div>
         </form>
 
         <!-- Кнопка добавления клиента -->
-        <button onclick="window.location.href='{%url 'add_client'%}' "  class="add-client-btn">Добавить клиента</button>
+        <button onclick="window.location.href='{% url 'add_client' %}'" class="add-client-btn">Добавить клиента</button>
     </div>
 </div>
 <script src="{% static 'bonus/js/personal_account.js' %}"></script>
