@@ -8,6 +8,7 @@
 </head>
 <body>
 <div class="dashboard-wrapper">
+    <button onclick="window.location.href='{%url 'login'%}' " class="exit">Выход</button>
     <div class="dashboard-container">
         <h1>Добро пожаловать, {{ user_name }}!</h1>
 
@@ -26,7 +27,7 @@
         </form>
 
         <!-- Кнопка добавления клиента -->
-        <button class="add-client-btn">Добавить клиента</button>
+        <button onclick="window.location.href='{%url 'add_client'%}' "  class="add-client-btn">Добавить клиента</button>
     </div>
 </div>
 </body>

@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 
-from bonus.models import Employee
+from bonus.models import Employee, User
 
 
 def login_view(request):
@@ -33,3 +33,13 @@ def personal_account(request):
     return render(request, 'bonus/personal_account.html', {
         'user_name': user_name
     })
+
+@login_required
+def add_client(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        phone = request.POST.get("phone")
+        if name and phone:
+            User.objects.create(name=name, phone=phone)
+            return redirect('personal_account')
+    return render(request, 'bonus/add_client.html')

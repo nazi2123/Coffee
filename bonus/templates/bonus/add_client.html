@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить клиента</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'bonus/css/add_client.css' %}">
+</head>
+<body>
+<div class="form-wrapper">
+    <div class="form-container">
+        <h2>Добавить клиента</h2>
+        <form method="post">
+            {% csrf_token %}
+            <label for="name">Имя клиента</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="phone">Телефон</label>
+            <input type="tel" id="phone" name="phone" required placeholder="+7 (___) ___-__-__">
+
+            <button type="submit">Сохранить</button>
+            <button  onclick="window.location.href='{%url 'personal_account'%}' " type="button">Назад</button>
+        </form>
+    </div>
+</div>
+
+<script src="{% static 'bonus/js/add_client.js' %}"></script>
+</body>
+</html>
