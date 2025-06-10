@@ -68,9 +68,9 @@ WSGI_APPLICATION = 'Coffee.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DATABASE_NAME', ''),  # mydatabase
-        'USER': os.environ.get('DATABASE_USER', ''),  # myuser
-        'PASSWORD': os.environ.get('DATABASE_PASSWORD', ''),  # mypassword
+        'NAME': os.environ.get('POSTGRES_DB', ''),  # mydatabase
+        'USER': os.environ.get('POSTGRES_USER', ''),  # myuser
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', ''),  # mypassword
         'HOST': os.environ.get('DATABASE_HOST', 'localhost'),  # db
         'PORT': os.environ.get('DATABASE_PORT', '5432'),  # 5432
     }

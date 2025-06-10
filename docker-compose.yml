@@ -1,8 +1,7 @@
 version: '3.8'
 
 # Подключаем файл .env для всех сервисов
-env_file:
-  - .env
+
 
 services:
   db:
