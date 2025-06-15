@@ -46,8 +46,13 @@ def add_client(request):
         name = request.POST.get('name')
         phone = request.POST.get("phone")
         if name and phone:
-            User.objects.create(name=name, phone=phone)
-            return redirect('personal_account')
+            user = User.objects.create(name=name, phone=phone)
+            context = {
+                'user_obj': user,
+                'card_balance': 0,
+                'searched': True,
+            }
+            return render(request, 'bonus/user_info.html', context)
     return render(request, 'bonus/add_client.html')
 
 
